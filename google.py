@@ -5,6 +5,10 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 
+from selenium.webdriver.chrome.options import Options
+
+# 크롬창 열지 않고 하고 싶을 때 headless option
+
 # 1. pip install selenium
 # 2. pip install webdriver_manager
 # https://selenium-python.readthedocs.io/api.html selenium api link
@@ -12,7 +16,12 @@ from selenium.webdriver.support.ui import WebDriverWait
 
 class GoogleKeywordScreenshooter:
     def __init__(self, keyword, screenshots_dir):
-        self.browser = webdriver.Chrome(ChromeDriverManager().install())
+        options = Options()
+        options.add_argument("--headless")
+        self.browser = webdriver.Chrome(
+            ChromeDriverManager().install(), options=options
+        )
+        #
         self.keyword = keyword
         self.screenshots_dir = screenshots_dir
 
